@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+{% load static%}
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdnview.contentder.com/v2/css/preview.css?V=2.0" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/result_page.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/search_bar.css'%}" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+
+    <title>BrainDigit Search</title>
+</head>
+
+<body>
+    <div class="top_bar">
+        <div class="search_con">
+            <div class="contentder_logo">
+                <img src="{% static 'image/stickylogowhite.png'%}" alt="logo contentder">
+            </div>
+            <div id="search_box_next">
+                <div class='search_size'>
+                    <form class="search_r">
+                        <input type="text" name="q" class="searchTerm" placeholder="      What are you looking for?" value='{{ request.GET.q }}'>
+                        <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="result_stat">
+            Found {{ result.total_hits }} Results ({{time}} sec)
+        </div>
+        <div class="result_count">
+            <div class="pagination">
+                <div class="line">
+                    <a href="">❮</a><a>{% if result.total_hits > 20 %} 20 of {{ result.total_hits }} Results {% endif %}</a>
+                    <a href="">❯</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="middle_row">
+        {% if result.total_hits > 0 %}
+
+        <ul>
+            {% for block in result.results%}
+
+            <li>
+                <div class="list_box">
+                    <div class='url_link'>
+                        <a href="{{block.page_url}}" target="_blank">{{block.page_url}}</a>
+                    </div>
+
+
+                    <div class="snippet">
+                        {% autoescape off %} {{block.html_code}} {% endautoescape %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+
+        </ul>
+        {% else %}
+        <h1>No component found, may be your search is missguided.</h1>
+        {% endif %}
+    </div>
+    <footer>
+        <p>
+            Programmed by 'Ashesh Shrestha' &copy;
+        </p>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="{% static 'js/load_image.js'%}"></script>
+</body>
+
+</html>

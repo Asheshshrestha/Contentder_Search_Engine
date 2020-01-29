@@ -1,0 +1,55 @@
+<!doctype html> {% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/search_bar.css'%}">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Brandigit Search</title>
+</head>
+
+<body>
+
+    <div id="heading">
+
+        <div class="row sidelaga">
+        
+            <div>Contentder Search </div>
+
+            <div id="one">. </div>
+            <div id="two">. </div>
+            <div id="three">. </div>
+
+        </div>
+    </div>
+    <div id="search_box">
+        <div class="wrap">
+            <form class="search">
+                <input type="text" name="q" class="searchTerm" placeholder="      What are you looking for?" value='{{ request.GET.q }}'>
+                <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </form>
+        </div>
+    </div>
+    <div class="auth">
+        <p>
+            Programmed by 'Ashesh Shrestha' &copy;
+        </p>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+</body>
+<script src="{% static 'js/loading.js' %}"></script>
+
+</html>
