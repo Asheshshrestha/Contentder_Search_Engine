@@ -38,13 +38,15 @@
             </div>
         </div>
         <div class="result_stat">
-            Found {{ result.total_hits }} Results ({{time}} sec)
+            Found {{ total_hits }} Results ({{time}} sec)
         </div>
         <div class="result_count">
             <div class="pagination">
                 <div class="line">
-                    <a href="">❮</a><a>{% if result.total_hits > 20 %} 20 of {{ result.total_hits }} Results {% endif %}</a>
-                    <a href="">❯</a>
+                    {% if results.has_previous %}
+                    <a href="?q={{ request.GET.q}}&page={{ results.previous_page_number }}">❮</a> {% endif %}
+                    <a>{{ results.number }}of {{ results.paginator.num_pages }}</a> {% if results.has_next %}
+                    <a href="?q={{ request.GET.q}}&page={{ results.next_page_number }}">❯</a> {% endif %}
                 </div>
             </div>
 
@@ -57,10 +59,10 @@
 
 
     <div class="middle_row">
-        {% if result.total_hits > 0 %}
+        {% if total_hits > 0 %}
 
         <ul>
-            {% for block in result.results%}
+            {% for block in results%}
 
             <li>
                 <div class="list_box">

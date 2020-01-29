@@ -4,6 +4,7 @@ from data_contender.models import ContentderData
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
 import microsearch
+from django.core.paginator import Paginator
 import timeit
 # Create your views
 ms = microsearch.Microsearch('C:/Users/acer/BrainDigit(Inter)/search_data')
@@ -61,17 +62,29 @@ def search_data(request):
     query = request.GET.get('q')
     offset = request.GET.get('offset')
     if query:
-        result = {'total_hits':0,'results':[]}
+        result ={'total_hits':0,'results':[]}
+        total_time=0
+        end_time=0
+        start_time =0
+        result_data = []
+        
         template_name = 'result.html'
-        start_time = timeit.default_timer()
+        
         try:
+            start_time = timeit.default_timer()
             result = ms.search(query)
-            print(result['results'][0])
+            end_time = timeit.default_timer()
+            total_obj = result['results']
+            paginator = Paginator(total_obj,20)
+            page = request.GET.get('page')
+            result_data = paginator.get_page(page)
+            total_time = end_time - start_time
         except:
-            pass
-        end_time = timeit.default_timer()
-        total_time = end_time - start_time
-        return render(request,template_name,{'result':result,'time':total_time})
+            print('ex')
+            total_time = 0
+        
+        
+        return render(request,template_name,{'total_hits':result['total_hits'],'results':result_data,'time':total_time})
     
 
     return render(request,template_name)
